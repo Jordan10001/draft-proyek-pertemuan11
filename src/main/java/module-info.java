@@ -8,8 +8,8 @@ module com.example.bdsqltester {
 
     opens com.example.bdsqltester to javafx.fxml;
     exports com.example.bdsqltester;
-    exports com.example.bdsqltester.datasources;
-    opens com.example.bdsqltester.datasources to javafx.fxml;
+    exports com.example.bdsqltester.DBsources;
+    opens com.example.bdsqltester.DBsources to javafx.fxml;
     exports com.example.bdsqltester.scenes;
     opens com.example.bdsqltester.scenes to javafx.fxml;
 
