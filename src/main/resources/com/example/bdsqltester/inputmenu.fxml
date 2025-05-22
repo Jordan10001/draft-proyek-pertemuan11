@@ -100,7 +100,15 @@
                </Label>
             </children>
          </GridPane>
-         <Button layoutX="100.0" layoutY="206.0" mnemonicParsing="false" onAction="#Inputmenu" prefHeight="26.0" prefWidth="300.0" style="-fx-background-color: #faf7ed;" text="Input" />
+         <Button layoutX="100.0" layoutY="206.0" mnemonicParsing="false" onAction="#Inputmenu" prefHeight="26.0" prefWidth="300.0" style="-fx-background-color: #faf7ed;" text="Input">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font></Button>
+         <Button layoutX="25.0" layoutY="17.0" mnemonicParsing="false" onAction="#onbackbutton" style="-fx-background-color: #faf7ed;" text="Back">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
       </children>
    </Pane>
 </VBox>

@@ -1,4 +1,6 @@
 package com.example.bdsqltester.scenes.user;
+
+import com.example.bdsqltester.Alert.AlertClass;
 import com.example.bdsqltester.DBsources.DBSourceManager;
 import com.example.bdsqltester.SceneLoader.SceneLoader;
 import javafx.collections.FXCollections;
@@ -15,85 +17,93 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserController {
+
     @FXML
     private ComboBox<String> filter;
 
     @FXML
     private TableView<Menu> menu_table;
-    @FXML
-    private TableColumn<Menu, String> menu_table_branch;
 
     @FXML
-    private TableColumn<Menu, String> menu_table_description;
+    private TableColumn<Menu, Integer> menu_table_no;
+
+    @FXML
+    private TableColumn<Menu, Long> menu_table_id; // ✅ tambahkan ini
 
     @FXML
     private TableColumn<Menu, String> menu_table_name;
 
     @FXML
-    private TableColumn<Menu, Long> menu_table_no;
+    private TableColumn<Menu, String> menu_table_branch;
 
     @FXML
-    private Label welcome_text;
+    private TableColumn<Menu, Double> menu_table_price;
 
     @FXML
-    private Button next_button;
+    private TableColumn<Menu, String> menu_table_description;
+
+    @FXML
+    public Label welcome_text;
 
     private ObservableList<Menu> menuList = FXCollections.observableArrayList();
 
+    @FXML
+    public void initialize() {
+        // Setup nomor urut
+        menu_table_no.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(String.valueOf(getIndex() + 1));
+                }
+            }
+        });
 
+        // Set cell value factories
+        menu_table_id.setCellValueFactory(new PropertyValueFactory<>("menuId")); // ✅ map ke getter di Menu.java
+        menu_table_name.setCellValueFactory(new PropertyValueFactory<>("menuName"));
+        menu_table_branch.setCellValueFactory(new PropertyValueFactory<>("branchName"));
+        menu_table_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        menu_table_description.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        loadMenuData();
+    }
+
+    private void loadMenuData() {
+        String query = "SELECT ID, menu_name, branch, price, description FROM menus";
+
+        try (Connection conn = DBSourceManager.getUserConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String id = rs.getString("ID");
+                String name = rs.getString("menu_name");
+                String branch = rs.getString("branch");
+                double price = rs.getDouble("price");
+                String desc = rs.getString("description");
+
+                Menu menu = new Menu(id, name, branch, price, desc);
+                menuList.add(menu);
+            }
+
+            menu_table.setItems(menuList);
+
+        } catch (SQLException e) {
+            AlertClass.ErrorAlert("Database Error", "Failed to load menu data", e.getMessage());
+        }
+    }
 
     @FXML
     public void onNextButtonClick(ActionEvent event) {
-        // Handle the next button click event
-        // You can add your logic here
-        SceneLoader.loadFXML(event, "/com/example/bdsqltester/inputmenu.fxml", "Dashboard");
+        SceneLoader.loadFXML(event, "/com/example/bdsqltester/inputmenu.fxml", "Input Menu");
     }
 
-    private void showAlert(String s) {
+    @FXML
+    public void onbackbutton(ActionEvent event) {
+        SceneLoader.loadFXML(event, "/com/example/bdsqltester/login-view.fxml", "Login");
     }
-
-//    @FXML
-//    public void initialize() {
-//        // Set up the columns with the property names
-//        menu_table_no.setCellFactory(col -> new TableCell<>() {
-//            @Override
-//            protected void updateItem(Long item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (empty) {
-//                    setText(null);
-//                } else {
-//                    setText(String.valueOf(getIndex() + 1)); // Row index + 1
-//                }
-//            }
-//        });
-//        menu_table_name.setCellValueFactory(new PropertyValueFactory<>("menuName"));
-//        menu_table_branch.setCellValueFactory(new PropertyValueFactory<>("branchName"));
-//        menu_table_description.setCellValueFactory(new PropertyValueFactory<>("description"));
-//
-//        loadMenuData(); // Call to load data
-//    }
-
-//    private void loadMenuData() {
-//        String query = "select menu_name, description, branch_name \n" +
-//                "from menus m\n" +
-//                "join branches b on m.branch_id = b.branch_id"; // Adjust your table name if needed
-//
-//        try (Connection conn = DBSourceManager.getUserConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query);
-//             ResultSet rs = stmt.executeQuery()) {
-//
-//            while (rs.next()) {
-//                Menu menu = new Menu(rs);
-//                menuList.add(menu);
-//            }
-//
-//            menu_table.setItems(menuList);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace(); // Replace with proper logging or UI alert
-//        }
-//    }
-
-
-
 }

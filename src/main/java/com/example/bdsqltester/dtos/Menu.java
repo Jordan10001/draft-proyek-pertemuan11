@@ -1,30 +1,22 @@
 package com.example.bdsqltester.dtos;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class Menu {
-    public long menuId;
-    public String menuName;
-    public String branchName;
-    public String description;
+    private String menuId;
+    private String menuName;
+    private String branchName;
+    private double price;
+    private String description;
 
-    public Menu(long menu_id, String menu_name, String branch_name, String description) {
-        this.menuId = menu_id;
-        this.menuName = menu_name;
-        this.branchName = branch_name;
+    public Menu(String menuId, String menuName, String branchName, double price, String description) {
+        this.menuId = menuId;
+        this.menuName = menuName;
+        this.branchName = branchName;
+        this.price = price;
         this.description = description;
     }
 
-    public Menu(ResultSet rs) throws SQLException {
-        this.menuName = rs.getString("menu_name");
-        this.branchName = rs.getString("branch_name");
-        this.description = rs.getString("description");
-    }
-
-    @Override
-    public String toString() {
-        return menuName;
+    public String getMenuId() {
+        return menuId;
     }
 
     public String getMenuName() {
@@ -35,10 +27,16 @@ public class Menu {
         return branchName;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public String getDescription() {
         return description;
     }
 
-
-
+    @Override
+    public String toString() {
+        return menuName + " (" + branchName + ")";
+    }
 }

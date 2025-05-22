@@ -1,6 +1,7 @@
 package com.example.bdsqltester.scenes.user;
 
 import com.example.bdsqltester.Alert.AlertClass;
+import com.example.bdsqltester.SceneLoader.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import com.example.bdsqltester.DBsources.DBSourceManager;
@@ -15,6 +16,10 @@ public class InputmenuController {
     public TextField branch;
     public TextField price;
     public TextField description;
+
+    public void onbackbutton(ActionEvent event){
+        SceneLoader.loadFXML(event, "/com/example/bdsqltester/user-view.fxml", "User View");
+    }
 
     public void Inputmenu(ActionEvent actionEvent) throws SQLException {
         String id = idmenu.getText();

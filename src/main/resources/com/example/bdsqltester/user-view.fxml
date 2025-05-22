@@ -8,22 +8,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bdsqltester.scenes.user.UserController">
+<AnchorPane fx:id="onbackbutton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1500.0" style="-fx-background-color: #ffe7a6;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bdsqltester.scenes.user.UserController">
    <children>
-      <TableView fx:id="menu_table" layoutX="32.0" layoutY="128.0" prefHeight="200.0" prefWidth="548.0">
+      <TableView fx:id="menu_table" layoutX="250.0" layoutY="138.0" prefHeight="422.0" prefWidth="1000.0">
         <columns>
-          <TableColumn fx:id="menu_table_no" prefWidth="54.0" text="No" />
-            <TableColumn fx:id="menu_table_name" prefWidth="129.33334350585938" text="Menu Name" />
-            <TableColumn fx:id="menu_table_branch" prefWidth="142.0" text="Branch" />
-            <TableColumn fx:id="menu_table_description" minWidth="0.0" prefWidth="212.66665649414062" text="Description" />
+            <TableColumn fx:id="menu_table_no" prefWidth="50.0" text="No" />
+            <TableColumn fx:id="menu_table_id" prefWidth="50.0" text="ID" />
+            <TableColumn fx:id="menu_table_name" prefWidth="200.0" text="Menu Name" />
+            <TableColumn fx:id="menu_table_branch" prefWidth="200.0" text="Branch" />
+            <TableColumn fx:id="menu_table_price" minWidth="0.0" prefWidth="200.0" text="Price" />
+            <TableColumn fx:id="menu_table_description" minWidth="0.0" prefWidth="300.0" text="Description" />
         </columns>
       </TableView>
-      <ComboBox fx:id="filter" layoutX="32.0" layoutY="81.0" prefHeight="25.0" prefWidth="97.0" />
+      <ComboBox fx:id="filter" layoutX="32.0" layoutY="81.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #faf7ed;" />
       <Label fx:id="welcome_text" layoutX="32.0" layoutY="39.0" text="Welcome, User">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="525.0" layoutY="349.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next Page" />
+      <Button layoutX="1110.0" layoutY="611.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #faf7ed;" text="Input Menu" />
+      <Button layoutX="286.0" layoutY="611.0" mnemonicParsing="false" onAction="#onbackbutton" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #faf7ed;" text="Back" />
    </children>
 </AnchorPane>
