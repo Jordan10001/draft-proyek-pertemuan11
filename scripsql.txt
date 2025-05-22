@@ -1,0 +1,34 @@
+-- Data User
+CREATE TABLE Userss (
+    ID SERIAL PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL,
+    Role VARCHAR(20) NOT NULL
+);
+
+INSERT INTO Userss (Username, Password, Role) VALUES
+('alice','12345678'   , 'Admin_Pusat'),
+('bob',   '12345678'  , 'Admin_Pusat'),
+('charlie','12345678' , 'Admin_Cabang'),
+('diana', '12345678'  , 'Admin_Cabang'),
+('edward','12345678'  , 'Admin_Cabang'),
+('frank','12345678'   , 'Admin_Cabang');
+
+SELECT *
+FROM Userss;
+
+
+-- Data Menu
+CREATE TABLE Menus (
+	ID VARCHAR(20) PRIMARY KEY,
+	Menu_Name VARCHAR(100) NOT NULL,
+	Branch VARCHAR(200) NOT NULL,
+	Price DOUBLE PRECISION NOT NULL,
+	Description VARCHAR(300) NOT NULL
+);
+
+INSERT INTO Menus (ID, Menu_Name, Branch, Price, Description) VALUES
+('M010', 'Ikan Bakar Rica', 'Cabang Makassar', 35000.00, 'Ikan bakar dengan sambal rica pedas');
+
+SELECT *
+FROM Menus;
