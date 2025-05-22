@@ -50,10 +50,20 @@ public class InputmenuController {
             stmt.setString(5, desc);
             stmt.executeUpdate();
             System.out.println("Menu inserted successfully.");
+            AlertClass.InformationAlert("Success", "Menu Inserted", "Menu has been successfully inserted.");
+            reloadForm();
         } catch (Exception e) {
             e.printStackTrace();
             AlertClass.ErrorAlert("Database Error", "Failed to insert menu", e.getMessage());
         }
+    }
+
+    private void reloadForm() {
+        idmenu.clear();
+        namemenu.clear();
+        branch.clear();
+        price.clear();
+        description.clear();
     }
 }
 /*
